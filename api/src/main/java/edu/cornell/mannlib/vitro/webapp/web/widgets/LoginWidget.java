@@ -98,24 +98,21 @@ public class LoginWidget extends Widget {
             forgotPasswordEnabled = "disabled";
         }
 
-        String orcidAuthEnabled = ConfigurationProperties.getInstance()
-                .getProperty("auth.orcid.enable");
-        log.debug("ORCID auth enabled: " + orcidAuthEnabled);
-
         String orcidClientId = ConfigurationProperties.getInstance()
-                .getProperty("auth.orcid.clientId");
+                .getProperty("orcid.clientId");
         log.debug("ORCID client ID: " + orcidClientId);
 
         String orcidClientPassword = ConfigurationProperties.getInstance()
-                .getProperty("auth.orcid.clientPassword");
+                .getProperty("orcid.clientPassword");
         log.debug("ORCID client password: " + orcidClientPassword);
 
         String orcidCallbackUrl = ConfigurationProperties.getInstance()
-                .getProperty("auth.orcid.callbackUrl");
+                .getProperty("orcid.webappBaseUrl");
         log.debug("ORCID callback URL: " + orcidCallbackUrl);
 
-        if (orcidAuthEnabled == null || orcidAuthEnabled.isEmpty() ||
-                orcidClientId == null || orcidClientId.isEmpty() ||
+        String orcidAuthEnabled = "true";
+
+        if (orcidClientId == null || orcidClientId.isEmpty() ||
                 orcidClientPassword == null || orcidClientPassword.isEmpty() ||
                 orcidCallbackUrl == null || orcidCallbackUrl.isEmpty()) {
             orcidAuthEnabled = "false";
