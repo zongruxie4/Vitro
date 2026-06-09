@@ -110,9 +110,12 @@ public class LoginWidget extends Widget {
                 .getProperty("orcid.webappBaseUrl");
         log.debug("ORCID callback URL: " + orcidCallbackUrl);
 
-        String orcidAuthEnabled = "true";
+        String orcidAuthEnabled = ConfigurationProperties.getInstance()
+                .getProperty("orcid.authEnabled");
+        log.debug("ORCID auth should be enabled: " + orcidAuthEnabled);
 
-        if (orcidClientId == null || orcidClientId.isEmpty() ||
+        if (orcidAuthEnabled == null || orcidAuthEnabled.isEmpty() ||
+                orcidClientId == null || orcidClientId.isEmpty() ||
                 orcidClientPassword == null || orcidClientPassword.isEmpty() ||
                 orcidCallbackUrl == null || orcidCallbackUrl.isEmpty()) {
             orcidAuthEnabled = "false";
