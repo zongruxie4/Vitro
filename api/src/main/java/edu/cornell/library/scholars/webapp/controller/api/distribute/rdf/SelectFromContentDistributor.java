@@ -84,6 +84,7 @@ public class SelectFromContentDistributor extends AbstractSparqlBindingDistribut
 
     @Override
     public void writeOutput(OutputStream output) throws DataDistributorException {
+        binder.checkAuthorization(ddContext, uriBindingNames);
         QueryHolder boundQuery = binder.bindValuesToQuery(uriBindingNames, literalBindingNames,
                 new QueryHolder(rawQuery));
         createSelectQueryContext(this.models.getRDFService(), boundQuery).execute().writeToOutput(output);

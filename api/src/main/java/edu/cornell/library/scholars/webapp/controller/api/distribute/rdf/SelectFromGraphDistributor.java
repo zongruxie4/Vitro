@@ -99,6 +99,7 @@ public class SelectFromGraphDistributor extends AbstractSparqlBindingDistributor
 
     @Override
     public void writeOutput(OutputStream output) throws DataDistributorException {
+        binder.checkAuthorization(ddContext, uriBindingNames);
         QueryHolder boundQuery = binder.bindValuesToQuery(uriBindingNames, literalBindingNames,
                 new QueryHolder(rawQuery));
         Model graph = new GraphBuilders(ddContext, graphBuilders).run();
