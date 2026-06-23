@@ -5,6 +5,7 @@ package edu.cornell.library.scholars.webapp.controller.api;
 import static edu.cornell.mannlib.vitro.webapp.auth.attributes.AccessOperation.EXECUTE;
 import static edu.cornell.mannlib.vitro.webapp.modelaccess.ModelNames.DISPLAY;
 import static edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner.SparqlQueryRunner.createSelectQueryContext;
+import static edu.cornell.mannlib.vitro.webapp.web.ContentType.TEXT_PLAIN;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -34,6 +35,7 @@ import edu.cornell.mannlib.vitro.webapp.controller.api.VitroApiServlet;
 import edu.cornell.mannlib.vitro.webapp.modelaccess.ModelAccess;
 import edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoader;
 import edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoaderException;
+import edu.cornell.mannlib.vitro.webapp.web.ContentType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jena.rdf.model.Model;
@@ -134,6 +136,7 @@ public class DistributeDataApiController extends VitroApiServlet {
             instance.writeOutput(outputStream);
         } catch (NotAuthorizedException e) {
             log.debug("403 Forbidden");
+            resp.setContentType(TEXT_PLAIN.getMediaType());
             resp.setStatus(403);
             try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)) {
                 writer.write(NOT_AUTHORIZED_FOR_THIS_ACTION);
